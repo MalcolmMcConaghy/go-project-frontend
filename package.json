@@ -1,0 +1,35 @@
+{
+  "name": "material-remix-ts",
+  "version": "5.0.0",
+  "private": true,
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev",
+    "postinstall": "remix setup node",
+    "start": "remix-serve build"
+  },
+  "dependencies": {
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "latest",
+    "@mui/material": "latest",
+    "@remix-run/node": "1.18.1",
+    "@remix-run/react": "1.18.1",
+    "@remix-run/serve": "1.18.1",
+    "@remix-run/server-runtime": "1.18.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "remix": "1.18.1"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "1.18.1",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "sideEffects": false
+}
