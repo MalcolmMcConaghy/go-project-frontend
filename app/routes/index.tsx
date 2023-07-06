@@ -1,26 +1,44 @@
-import * as React from 'react';
-import type { MetaFunction } from 'remix';
-import { Link } from 'remix';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import { type MetaFunction } from "@remix-run/node";
+import Typography from "@mui/material/Typography";
+import Job from "~/src/components/Job";
+import { Box } from "@mui/material";
+import { json } from "@remix-run/node"; // or cloudflare/deno
+import { useLoaderData } from "@remix-run/react";
 
 // https://remix.run/api/conventions#meta
 export const meta: MetaFunction = () => {
   return {
-    title: 'Remix Starter',
-    description: 'Welcome to remix!',
+    title: "Job search tracker",
+    description: "Keep track of your job search here!",
   };
 };
 
+export async function loader() {
+  const res = await fetch("http://127.0.0.1:5000/get-jobs");
+  return json(await res.json());
+}
+
 // https://remix.run/guides/routing#index-routes
 export default function Index() {
+  const jobs = useLoaderData<typeof loader>();
   return (
     <React.Fragment>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Material UI Remix in TypeScript example
+      <Typography variant="h4" component="h1" gutterBottom textAlign="center">
+        Job search tracker
       </Typography>
-      <Link to="/about" color="secondary">
-        Go to the about page
-      </Link>
+      <Typography variant="h5" component="h2" gutterBottom textAlign="center">
+        Keep track of job applications by simply adding the job title, company
+        and status
+      </Typography>
+      <Box my={4}>
+        <Typography variant="body1" gutterBottom ml={1}>
+          Heres your latest job updates
+        </Typography>
+        {jobs.map((job: any) => {
+          return <Job title={job.Title} company={job.Company} />;
+        })}
+      </Box>
     </React.Fragment>
   );
 }
